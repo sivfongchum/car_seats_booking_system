@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, type Relation, JoinColumn } from 'typeorm';
+import { CreateDateColumn, Entity, Column, PrimaryGeneratedColumn, ManyToOne, type Relation, JoinColumn } from 'typeorm';
 import { TripStatusEnums } from '../enums/trip_status_enums.js';
 import { Driver } from '../../drivers/entities/driver.entity.js';
 import { Vehicle } from '../../vehicles/entities/vehicle.entity.js';
@@ -18,8 +18,15 @@ export class Trip {
     @Column({name : 'driver_id', type: "varchar", nullable: false})
     driverId: string;
 
-    @Column({name : 'status', type: "varchar", length: 20, nullable: false , enum: TripStatusEnums})
-    status: TripStatusEnums.PENDING;
+    @Column({
+        name: 'status',
+        type: 'varchar',
+        length: 20,
+        nullable: false,
+        enum: TripStatusEnums,
+        default: TripStatusEnums.SCHEDULED,
+      })
+      status: TripStatusEnums;  
 
     @Column({name : 'departure_date', type: "timestamptz"})
     departureDate: Date;
@@ -33,8 +40,8 @@ export class Trip {
     @Column({name : "currency", type: "varchar", length: 10, nullable: false})
     currency: string;
 
-    @Column({name : 'created_at', type: "timestamptz"})
-    createdAt: Date;   
+    @CreateDateColumn({ name: 'created_at', type: 'timestamptz' })
+  createdAt: Date;
     
     @ManyToOne(() => Driver, (driver) => driver.trips)
     @JoinColumn({ name: "driver_id" })

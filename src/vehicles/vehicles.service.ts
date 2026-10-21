@@ -103,7 +103,14 @@ export class VehiclesService {
     return `This action updates a #${id} vehicle`;
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} vehicle`;
+  async removeVehicle(id: string) : Promise<{message : string}> {
+    const vehicle = await this.vehicleRepository.findOne({ where: { id :id } , relations: { seats: true } });
+
+    if (!vehicle) {
+      throw new NotFoundException(`Vehicle with id ${id} not found`);
+    }
+    await this.vehicleRepository.delete(id);
+
+    return {message : 'Vehicle removed'};
   }
 }

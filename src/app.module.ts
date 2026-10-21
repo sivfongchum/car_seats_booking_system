@@ -15,6 +15,7 @@ import { VehiclesModule } from './vehicles/vehicles.module.js';
 import { SeatsModule } from './seats/seats.module.js';
 import { DriversModule } from './drivers/drivers.module.js';
 import { RoutesModule } from './routes/routes.module.js';
+import { SchedulesModule } from './schedules/schedules.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -41,6 +42,7 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     SeatsModule,
     DriversModule,
     RoutesModule,
+    SchedulesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

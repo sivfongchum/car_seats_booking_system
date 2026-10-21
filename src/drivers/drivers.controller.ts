@@ -9,7 +9,7 @@ export class DriversController {
 
   @Post()
   create(@Body() createDriverDto: CreateDriverDto) {
-    return this.driversService.create(createDriverDto);
+    return this.driversService.createDriver(createDriverDto);
   }
 
   @Get()

@@ -21,7 +21,7 @@ export class Seat {
     @Column({name : "status", type: "varchar", length: 20, nullable: false, enum: SeatStatusEnums, default: SeatStatusEnums.AVAILABLE})
     status: SeatStatusEnums;
 
-    @ManyToOne(() => Vehicle, (vehicle) => vehicle.seats)
+    @ManyToOne(() => Vehicle, (vehicle) => vehicle.seats, {onDelete: 'CASCADE'})
     @JoinColumn({ name: "vehicle_id" })
     vehicle: Relation<Vehicle>;
 
